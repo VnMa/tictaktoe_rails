@@ -36,12 +36,26 @@ ul.list-unstyle {
         display: flex;
         justify-content: space-evenly   ;
 
+        // TODO: Align cell center vertical and horizontal
         .board-cell {
             background-color: azure;
-            // padding: 20px;
             min-width: 180px;
             min-height: 180px;
+            text-align: center;
+
+            margin: auto;
+            padding: 10px 0;
+            
+            font-size: 100px;
+            font-weight: bold;
         }
     }
-    
+}
+
+.o-icon {
+    color: orange;
+}
+
+.x-icon {
+    color: darkgray;
 }

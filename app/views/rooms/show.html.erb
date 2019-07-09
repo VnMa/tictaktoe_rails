@@ -21,14 +21,14 @@
 <% else %>
 <p>Display game info</p>
 <p>Players: <%= @room.user_1 %> | <%= @room.user_2 %></p>
-<p><em><%= @room.turn%></em> turn</p>
-
+<p><em><%= @room.turn%></em> turn ( icon: <%= %>)</p>
+<input type="hidden" id="room_id" name="room_id" value="<%= @room.id%>">
 <div class="board-container">
 <% @board.each_with_index do |row, indX| %>
   <div class="board-row"> 
     <% row.each_with_index do |cell, indY| %>
-      <div class="board-cell" data-x="<%= indX %>" data-y="<%= indY %>">
-        <%= cell + "(#{indX}, #{indY})" %>
+      <div class="board-cell <%= (cell == 'o') ? 'o-icon' : 'x-icon'%>" data-x="<%= indX %>" data-y="<%= indY %>">
+        <%= cell %>
       </div>
     <% end %>
   </div>

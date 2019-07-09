@@ -22,13 +22,32 @@ class RoomsController < ApplicationController
   end
 
   def cell_click
-
+    x = params[:x].to_i
+    y = params[:y].to_i
+    @room = ::Room.find(params[:id])
+    unless @room.nil?
+      board = JSON.parse @room.board
+      unless (board[x][y].empty?)
+        render :json => {error: "Cell [#{x}, #{y}] is reserved. Please click another vacant sport "}
+      else
+        # board[x][y] = @room.current_icon
+        # @room.switch_turn
+        @room.mark_cell(x, y)
+        render :json => {room: @room, success: 'ok'}
+      end
+    else      
+      render :json => {:success => false, error: "Unable to find room id: #{params[:id]}"}
+    end
   end
 
   def show
     @room = Room.find(params[:id])
     @room.turn ||= @room.user_1
-    @board = generate_board 3
+    if @room.board.blank?
+      @room.board = generate_board 3
+      @room.save
+    end
+    @board = JSON.parse(@room.board)
   end
 
   private 

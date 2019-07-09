@@ -22,6 +22,12 @@ document.addEventListener('turbolinks:load', () => {
         const user = '';
         const x = $(event.target).data('x');
         const y = $(event.target).data('y');
-        console.log('CLicked: ', x, y);
+        const room_id = $('#room_id').val();
+        console.log('CLicked: ', x, y, room_id);
+
+        $.post(`/rooms/${room_id}/cell_click`, {x, y}, (result) => {
+            // console.log('Error: ', err, params);
+            console.log('result: ', result);
+        })
     }) 
 })
