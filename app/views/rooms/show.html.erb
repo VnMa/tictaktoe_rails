@@ -1,1 +1,40 @@
 <h1><%= @room.name %></h1>
+
+<% if @room.user_1.nil? || @room.user_2.nil? %>
+<%= form_tag @room, method: 'PATCH'%>
+    <div class="form-group">
+    <label for="">Player 1</label>
+    <input type="text" name="user_1" class="form-control">
+    
+    </div>
+    <div class="form-group">
+    <label for=""><b>Player 2</b></label>
+    <input type="text" name="user_2" class="form-control">
+    
+    </div>
+    <div class="form-group">
+        <label for=""><b>Size board</b></label>
+        <input type="text" name="size" placeholder="3" class="form-control">
+    </div>
+    <button type="submit" class="submit" >Create new game</button>
+
+<% else %>
+<p>Display game info</p>
+<p>Players: <%= @room.user_1 %> | <%= @room.user_2 %></p>
+<p><em><%= @room.turn%></em> turn</p>
+
+<div class="board-container">
+<% @board.each_with_index do |row, indX| %>
+  <div class="board-row"> 
+    <% row.each_with_index do |cell, indY| %>
+      <div class="board-cell" data-x="<%= indX %>" data-y="<%= indY %>">
+        <%= cell + "(#{indX}, #{indY})" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+</div>
+
+
+
+<% end %>

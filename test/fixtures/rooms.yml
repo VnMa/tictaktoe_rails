@@ -2,8 +2,12 @@
 
 one:
   name: MyString
-  user: one
+  user_1: MyString
+  user_2: MyString
+  turn: MyString
 
 two:
   name: MyString
-  user: two
+  user_1: MyString
+  user_2: MyString
+  turn: MyString

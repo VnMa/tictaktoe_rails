@@ -1,9 +1,9 @@
 <h1> Room list</h1>
 
-<ul>
+<ul class='list-unstyle'>
 <% @rooms.each do |item| %>
   <li>
-  <%= item.inspect %>
+  <%= link_to item.name, item %>
   
   
   </li> 

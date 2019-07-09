@@ -4,13 +4,42 @@ class RoomsController < ApplicationController
   end
 
   def index
-    @rooms = room_list
+    @rooms = Room.first(10)
   end
 
   def create
   end
 
+  def update
+    id = params[:id]
+    @room = ::Room.find(id)
+    unless @room.nil?
+      @room.update(room_params)
+      render :show
+    else
+      render :show, error: "Can not find room id: #{id}"
+    end
+  end
+
+  def cell_click
+
+  end
+
   def show
-    room = room_list.find{|r| r.id == params[:id]}
+    @room = Room.find(params[:id])
+    @room.turn ||= @room.user_1
+    @board = generate_board 3
+  end
+
+  private 
+  def room_params
+    params.permit(:name, :user_1, :user_2, :turn)
+  end
+
+  def generate_board(size)
+    row = Array.new(size) {|i| ''}
+    (1..3).reduce([]) { |acc, _|
+      acc.push(row)
+    }
   end
 end

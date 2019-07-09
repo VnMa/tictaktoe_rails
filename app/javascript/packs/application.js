@@ -7,6 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+require('jquery')
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -15,3 +16,12 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+document.addEventListener('turbolinks:load', () => {
+    $('.board-cell').click((event) => {
+        const user = '';
+        const x = $(event.target).data('x');
+        const y = $(event.target).data('y');
+        console.log('CLicked: ', x, y);
+    }) 
+})
